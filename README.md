@@ -52,7 +52,7 @@ ImbCoL::complexity(iris[,1:4], iris[,5], type="class")
 ImbCoL::overlapping(Species ~ ., iris,  type="class")
 
 ## Extract the decomposed N3 measure using neighborhood function
-ImbCoL::neighborhhod(Species ~ ., iris, measures="N3_partial")
+ImbCoL::neighborhood(Species ~ ., iris, measures="N3_partial")
 ```
 
 ## Developer notes
