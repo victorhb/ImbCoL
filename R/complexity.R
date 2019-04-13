@@ -52,7 +52,7 @@
 #' ## Extract all complexity measures for classification task
 #' data(iris)
 #' complexity(Species ~ ., iris, type="class")
-
+#' @export
 complexity <- function(...) {
   UseMethod("complexity")
 }
