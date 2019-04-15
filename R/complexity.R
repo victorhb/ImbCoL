@@ -59,7 +59,7 @@ complexity <- function(...) {
 
 #' @rdname complexity
 #' @export
-complexity.default <- function(x, y, type, groups="all", ...) {
+complexity.default <- function(x, y, groups="all", ...) {
 
   if(!is.data.frame(x)) {
     stop("data argument must be a data.frame")
@@ -68,8 +68,6 @@ complexity.default <- function(x, y, type, groups="all", ...) {
   if(is.data.frame(y)) {
     y <- y[, 1]
   }
-
-  type <- match.arg(type, c("class", "regr"), TRUE)
 
   if(type == "class") {
     if(min(table(y)) < 2) {
@@ -97,7 +95,7 @@ complexity.default <- function(x, y, type, groups="all", ...) {
 
 #' @rdname complexity
 #' @export
-complexity.formula <- function(formula, data, type, groups="all", ...) {
+complexity.formula <- function(formula, data, groups="all", ...) {
 
   if(!inherits(formula, "formula")) {
     stop("method is only for formula datas")
@@ -111,16 +109,9 @@ complexity.formula <- function(formula, data, type, groups="all", ...) {
   attr(modFrame, "terms") <- NULL
 
   complexity.default(modFrame[, -1, drop=FALSE], modFrame[, 1, drop=FALSE],
-    type, groups, ...)
+    groups, ...)
 }
 
-ls.complexity <- function(type) {
-
-  switch(type,
-    class = {
+ls.complexity <- function() {
       c("overlapping", "neighborhood", "linearity.class")
-    }, regr = {
-      c("correlation", "linearity.regr", "smoothness", "dimensionality")
-    }
-  )
 }

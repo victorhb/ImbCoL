@@ -8,9 +8,9 @@
 \usage{
 complexity(...)
 
-\method{complexity}{default}(x, y, type, groups = "all", ...)
+\method{complexity}{default}(x, y, groups = "all", ...)
 
-\method{complexity}{formula}(formula, data, type, groups = "all", ...)
+\method{complexity}{formula}(formula, data, groups = "all", ...)
 }
 \arguments{
 \item{...}{Not used.}
@@ -19,15 +19,15 @@ complexity(...)
 
 \item{y}{A response vector with one value for each row/component of x.}
 
-\item{type}{The type of supervised problem: The \code{"class"} is used for 
-classification tasks and \code{"regr"} for regression tasks.}
-
 \item{groups}{A list of complexity measures groups or \code{"all"} to include
 all of them.}
 
 \item{formula}{A formula to define the output column.}
 
 \item{data}{A data.frame dataset contained the input and output attributes.}
+
+\item{type}{The type of supervised problem: The \code{"class"} is used for 
+classification tasks and \code{"regr"} for regression tasks.}
 }
 \value{
 A numeric vector named by the requested complexity measures.

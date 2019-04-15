@@ -43,13 +43,13 @@ The simplest way to compute the complexity measures are using the `complexity` m
 
 ```r
 ## Extract all complexity measures available
-ImbCoL::complexity(Species ~ ., iris, type="class")
+ImbCoL::complexity(Species ~ ., iris)
 
 ## Extract all complexity measures using data frame
-ImbCoL::complexity(iris[,1:4], iris[,5], type="class")
+ImbCoL::complexity(iris[,1:4], iris[,5])
 
 ## Extract the overlapping measures
-ImbCoL::overlapping(Species ~ ., iris,  type="class")
+ImbCoL::overlapping(Species ~ ., iris)
 
 ## Extract the decomposed N3 measure using neighborhood function
 ImbCoL::neighborhood(Species ~ ., iris, measures="N3_partial")
