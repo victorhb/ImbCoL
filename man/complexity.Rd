@@ -52,7 +52,7 @@ The following groups are allowed for this method:
 \examples{
 ## Extract all complexity measures for classification task
 data(iris)
-complexity(Species ~ ., iris, type="class")
+complexity(Species ~ ., iris)
 }
 \references{
 Victor H. Barella and Luis P. Garcia and Marcilio P. de Souto and Ana C. Lorena

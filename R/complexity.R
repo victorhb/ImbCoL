@@ -49,7 +49,7 @@
 #' @examples
 #' ## Extract all complexity measures for classification task
 #' data(iris)
-#' complexity(Species ~ ., iris, type="class")
+#' complexity(Species ~ ., iris)
 #' @export
 complexity <- function(...) {
   UseMethod("complexity")
@@ -67,21 +67,19 @@ complexity.default <- function(x, y, groups="all", ...) {
     y <- y[, 1]
   }
 
-  if(type == "class") {
-    if(min(table(y)) < 2) {
-      stop("number of examples in the minority class should be >= 2")
-    }
-  } 
+  if(min(table(y)) < 2) {
+    stop("number of examples in the minority class should be >= 2")
+  }
 
   if(nrow(x) != length(y)) {
     stop("x and y must have same number of rows")
   }
 
   if(groups[1] == "all") {
-    groups <- ls.complexity(type)
+    groups <- ls.complexity()
   }
 
-  groups <- match.arg(groups, ls.complexity(type), TRUE)
+  groups <- match.arg(groups, ls.complexity(), TRUE)
   colnames(x) <- make.names(colnames(x))
 
   unlist(
