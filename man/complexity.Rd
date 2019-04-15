@@ -25,9 +25,6 @@ all of them.}
 \item{formula}{A formula to define the output column.}
 
 \item{data}{A data.frame dataset contained the input and output attributes.}
-
-\item{type}{The type of supervised problem: The \code{"class"} is used for 
-classification tasks and \code{"regr"} for regression tasks.}
 }
 \value{
 A numeric vector named by the requested complexity measures.

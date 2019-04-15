@@ -11,8 +11,6 @@
 #'  all of them.
 #' @param formula A formula to define the output column.
 #' @param data A data.frame dataset contained the input and output attributes.
-#' @param type The type of supervised problem: The \code{"class"} is used for 
-#'  classification tasks and \code{"regr"} for regression tasks.
 #' @param ... Not used.
 #' @details
 #'  The following groups are allowed for this method:
