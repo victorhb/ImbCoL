@@ -118,14 +118,9 @@ ls.neighborhood <- function() {
 }
 
 c.N1 <- function(dst, data) {
-  
-  g <- igraph::graph.adjacency(dst, mode="undirected", weighted=TRUE)
-  tree <- as.matrix(igraph::as_adj(igraph::mst(g)))
-  
-  tmp <- which(tree != 0, arr.ind=TRUE)
-  aux <- which(data[tmp[,1],]$class != data[tmp[,2],]$class)
-  aux <- length(unique(tmp[aux,1]))
-  return(aux/nrow(data))
+  links = ape::mst(as.dist(dst))
+  aux = sapply(rownames(links), FUN = function(x) sum(data[x,"class"] != data[names(which(links[x,] == 1)),"class"]) > 0 )
+  return(sum(aux)/nrow(data))
 }
 
 intra <- function(dst, data, i) {
@@ -253,15 +248,11 @@ c.LSC <- function(dst, data) {
 
 c.N1_partial <- function(dst, data) {
   
-  g <- igraph::graph.adjacency(dst, weighted=TRUE)
-  tree <- as.matrix(igraph::as_adj(igraph::mst(igraph::as.undirected(g))))
-  
-  tmp = which(tree != 0, arr.ind = TRUE)
-  cons = data[tmp[,1],]$class != data[tmp[,2],]$class
+  links = ape::mst(as.dist(dst))
   classes <- unique(data$class)
   ret = mapply(classes, FUN=function(c){
-    aux = sum(data[unique(tmp[cons,1]),"class"] == c)
-    return(aux/sum(data[,"class"] == c))
+    aux = sapply(rownames(data[data$class == c,]), FUN = function(x) sum(data[x,"class"] != data[names(which(links[x,] == 1)),"class"]) > 0 )
+    return(sum(aux)/sum(data$class == c))
   })
   names(ret) = classes
   return(ret)
