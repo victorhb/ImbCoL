@@ -39,7 +39,7 @@ library("ImbCoL")
 ```
 ## Example of use
 
-The simplest way to compute the complexity measures are using the `complexity` method. It is possible to use a `formula` as parameter or a `data.frame`. To extract a specific measure, use the function related with the group. A simple example is given next:
+The simplest way to compute the complexity measures is using the `complexity` method. It is possible to use a `formula` as parameter or a `data.frame`. To extract a specific measure, use the function related with the group. A simple example is given next:
 
 ```r
 ## Extract all complexity measures available
