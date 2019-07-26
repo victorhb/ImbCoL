@@ -64,7 +64,7 @@ The following measures are allowed for this method:
      (LS) and defined as the set of points from the dataset whose distance of
      each example is smaller than the distance from the exemples of the 
      different class. LSC is the average of the LS.}
-   \item{"X_partial"}{X \in [N1,N2,N3,N4,T1]. It is the decomposed version of the 
+   \item{"X_partial"}{X in [N1,N2,N3,N4,T1]. It is the decomposed version of the 
      correponding X function. Instead of giving a single complexity value 
      for the dataset, it returns one complexity value per class.}
  }
