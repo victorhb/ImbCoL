@@ -86,7 +86,7 @@ overlapping.default <- function(x, y, measures="all", ...) {
 
   sapply(measures, function(f) {
     eval(call(paste("c", f, sep="."), data=data))
-  })
+  }, simplify = F)
 }
 
 #' @rdname overlapping
@@ -109,7 +109,7 @@ overlapping.formula <- function(formula, data, measures="all", ...) {
 }
 
 ls.overlapping <- function() {
-  c("F1", "F2", "F3", "F4","F2_partial","F3_partial","F4_partial")
+  c("F2_partial","F3_partial","F4_partial")
 }
 
 branch <- function(data, j) {
@@ -128,20 +128,6 @@ den <- function(data, j) {
 
   tmp <- branch(data, j)
   aux <- rowSums((t(tmp) - colMeans(tmp))^2)
-  return(aux)
-}
-
-
-
-c.F1_old <- function(data) {
-
-  aux <- do.call("cbind", 
-    lapply(levels(data$class), function(i) {
-      num(data, i)/den(data, i)
-    })
-  )
-
-  aux <- max(rowSums(aux, na.rm=TRUE), na.rm=TRUE)
   return(aux)
 }
 
@@ -167,8 +153,10 @@ c.F1 <- function(data) {
   
   aux <- rowSums(do.call("cbind", num)) / 
     rowSums(do.call("cbind", den))
-  
-  return(max(aux, na.rm=TRUE))
+
+  aux <- 1 / (aux + 1)
+
+  return(min(aux, na.rm=TRUE))
 }
 
 dvector <- function(data) {
@@ -249,6 +237,9 @@ c.F3 <- function(data) {
 
   aux <- data.frame(aux)
   aux <- mean(colMax(aux))
+
+  aux = 1 - aux
+
   return(aux)
 }
 
@@ -276,6 +267,9 @@ c.F4 <- function(data) {
   }, d=data)
 
   aux <- mean(aux)
+ 
+  aux <- 1 - aux
+  
   return(aux)
 }
 
@@ -335,6 +329,9 @@ c.F3_partial <- function(data)
     aux <- rbind(aux,0)
     aux <- data.frame(aux)
     aux <- colMax(aux)
+
+    aux <- 1 - aux
+
     names(aux) <- levels(data$class)
     return(aux)
 }
@@ -361,7 +358,9 @@ c.F4_partial <- function(data) {
     nclass = sum(data$class == levels(data$class)[d])
     (nclass - nrow(n))/nclass
   }) 
-  
+
+  aux <- 1 - aux 
+ 
   names(aux) <- levels(data$class)
   return(aux)
 }
