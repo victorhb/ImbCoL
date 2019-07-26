@@ -121,6 +121,10 @@ c.L1 <- function(model, data) {
   }, m=model, d=data)
 
   aux <- mean(aux)
+  
+  aux <- 1 / (aux + 1)
+  aux <- 1 - aux
+  
   return(aux)
 }
 
@@ -176,6 +180,10 @@ c.L1_partial <- function(model, data){ #recieves as entry data_ova and model_ova
   })
   
   names(aux) <- names(data)
+  
+  aux <- 1 / (aux + 1)
+  aux <- 1 - aux
+  
   return(aux)
 }
 
