@@ -142,6 +142,10 @@ c.N2 <- function(dst, data) {
   })
   
   aux <- sum(aux[1,])/sum(aux[2,])
+  
+  aux <- 1/(1+aux)
+  aux <- 1 - aux
+  
   return(aux)
 }
 
@@ -271,6 +275,10 @@ c.N2_partial <- function(dst, data) {
     aux = sum(aux[1,])/sum(aux[2,])
   })
   names(ret) = levels(data$class)
+  
+  ret = ret / (1+ret)
+  ret = 1 - ret
+  
   return(ret)
 }
 
