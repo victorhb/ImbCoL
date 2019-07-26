@@ -46,7 +46,7 @@ The following measures are allowed for this method:
      dataset randomly interpolating pairs of training examples of the same 
      class and then induce a linear SVM on the original data and measure 
      the error rate in the new data points.}
-   \item{"LX_partial"}{X \in [1,2,3]. It is the decomposed version of the 
+   \item{"LX_partial"}{X in [1,2,3]. It is the decomposed version of the 
      correponding LX function. Instead of giving a single complexity value 
      for the dataset, it returns one complexity value per class.}
  }
