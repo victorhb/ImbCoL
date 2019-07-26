@@ -114,7 +114,7 @@ neighborhood.formula <- function(formula, data, measures="all", ...) {
 }
 
 ls.neighborhood <- function() {
-  c("N1","N2", "N3", "N4", "T1", "N1_partial","N2_partial", "N3_partial", "N4_partial", "T1_partial")
+  c("N1_partial","N2_partial", "N3_partial", "N4_partial", "T1_partial")
 }
 
 c.N1 <- function(dst, data) {
