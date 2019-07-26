@@ -267,6 +267,9 @@ c.F4 <- function(data) {
   }, d=data)
 
   aux <- mean(aux)
+  
+  aux <- 1 - aux
+  
   return(aux)
 }
 
@@ -357,5 +360,8 @@ c.F4_partial <- function(data) {
   }) 
   
   names(aux) <- levels(data$class)
+  
+  aux <- 1 - aux
+  
   return(aux)
 }
