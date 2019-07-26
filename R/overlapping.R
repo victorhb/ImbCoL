@@ -131,20 +131,6 @@ den <- function(data, j) {
   return(aux)
 }
 
-
-
-c.F1_old <- function(data) {
-
-  aux <- do.call("cbind", 
-    lapply(levels(data$class), function(i) {
-      num(data, i)/den(data, i)
-    })
-  )
-
-  aux <- max(rowSums(aux, na.rm=TRUE), na.rm=TRUE)
-  return(aux)
-}
-
 numerator <- function(j, data) {
   
   tmp <- branch(data, j)
@@ -167,6 +153,8 @@ c.F1 <- function(data) {
   
   aux <- rowSums(do.call("cbind", num)) / 
     rowSums(do.call("cbind", den))
+  
+  aux <- 1/(aux + 1)
   
   return(max(aux, na.rm=TRUE))
 }
@@ -249,6 +237,9 @@ c.F3 <- function(data) {
 
   aux <- data.frame(aux)
   aux <- mean(colMax(aux))
+  
+  aux <- 1 - aux
+  
   return(aux)
 }
 
@@ -336,6 +327,9 @@ c.F3_partial <- function(data)
     aux <- data.frame(aux)
     aux <- colMax(aux)
     names(aux) <- levels(data$class)
+  
+    aux <- 1 - aux
+  
     return(aux)
 }
 
