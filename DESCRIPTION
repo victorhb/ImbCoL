@@ -1,6 +1,6 @@
 Package: ImbCoL
 Title: Data Complexity Measures for Imbalanced Classification Tasks
-Version: 1.0
+Version: 1.0.1
 Authors@R: 
     person(given = "Victor",
            family = "Barella",
