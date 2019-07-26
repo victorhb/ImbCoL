@@ -59,7 +59,7 @@ The following measures are allowed for this method:
      previous step is repeated on the remaining dataset until all the 
      features have been considered or no example remains. F4 returns the 
      ratio of examples that have been discriminated.}
-   \item{"FX_partial"}{X \in [2,3,4]. It is the decomposed version of the 
+   \item{"FX_partial"}{X in [2,3,4]. It is the decomposed version of the 
      correponding FX function. Instead of giving a single complexity value 
      for the dataset, it returns one complexity value per class.}
  }
