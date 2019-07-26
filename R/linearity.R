@@ -81,7 +81,7 @@ linearity.class.default <- function(x, y, measures="all", ...) {
     }else{
       eval(call(paste("c", f, sep="."), model=model, data=data))
     }
-  })
+  }, simplify = F)
 }
 
 #' @rdname linearity.class
@@ -121,10 +121,10 @@ c.L1 <- function(model, data) {
   }, m=model, d=data)
 
   aux <- mean(aux)
-  
+
   aux <- 1 / (aux + 1)
   aux <- 1 - aux
-  
+
   return(aux)
 }
 
@@ -178,12 +178,11 @@ c.L1_partial <- function(model, data){ #recieves as entry data_ova and model_ova
     #sum(abs(dst))/(nrow(data_interest)*hyperretangle(data_interest))
     sum(abs(dst))/(nrow(data_interest))
   })
-  
+
   aux <- 1 / (aux + 1)
-  aux <- 1 - aux
-  
+  aux <- 1 - aux  
+
   names(aux) <- names(data)
-  
   return(aux)
 }
 

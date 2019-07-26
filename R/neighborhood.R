@@ -91,7 +91,7 @@ neighborhood.default <- function(x, y, measures="all", ...) {
   
   sapply(measures, function(f) {
     eval(call(paste("c", f, sep="."), dst=dst, data=data))
-  })
+  }, simplify = F)
 }
 
 #' @rdname neighborhood
@@ -142,10 +142,10 @@ c.N2 <- function(dst, data) {
   })
   
   aux <- sum(aux[1,])/sum(aux[2,])
-  
-  aux <- 1/(1+aux)
+
+  aux <- 1 / (aux +1)
   aux <- 1 - aux
-  
+
   return(aux)
 }
 
@@ -274,11 +274,11 @@ c.N2_partial <- function(dst, data) {
     
     aux = sum(aux[1,])/sum(aux[2,])
   })
-  names(ret) = levels(data$class)
-  
-  ret = ret / (1+ret)
+
+  ret = 1 / (1 + ret)
   ret = 1 - ret
-  
+
+  names(ret) = levels(data$class)
   return(ret)
 }
 
