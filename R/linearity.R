@@ -104,7 +104,7 @@ linearity.class.formula <- function(formula, data, measures="all", ...) {
 }
 
 ls.linearity.class <- function() {
-  c("L1", "L2", "L3","L1_partial","L2_partial","L3_partial")
+  c("L1_partial","L2_partial","L3_partial")
 }
 
 smo <- function(data) {
