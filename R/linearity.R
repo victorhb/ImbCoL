@@ -179,10 +179,10 @@ c.L1_partial <- function(model, data){ #recieves as entry data_ova and model_ova
     sum(abs(dst))/(nrow(data_interest))
   })
   
-  names(aux) <- names(data)
-  
   aux <- 1 / (aux + 1)
   aux <- 1 - aux
+  
+  names(aux) <- names(data)
   
   return(aux)
 }
