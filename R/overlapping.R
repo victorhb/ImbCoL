@@ -109,7 +109,7 @@ overlapping.formula <- function(formula, data, measures="all", ...) {
 }
 
 ls.overlapping <- function() {
-  c("F1", "F2", "F3", "F4","F2_partial","F3_partial","F4_partial")
+  c("F2_partial","F3_partial","F4_partial")
 }
 
 branch <- function(data, j) {
