@@ -7,6 +7,13 @@ Authors@R:
            role = c("aut", "cre"),
            email = "victorhb@icmc.usp.br")
 Description: These are a set of measures to assess the difficulty of each class of a classification task based on the training set. The data must be structured in a data.frame format. For more information about the data complexity measures decomposed by class, check Barella et al. (doi: 10.1109/IJCNN.2018.8489661)
+Imports:
+  cluster,
+  e1071,
+  FNN,
+  igraph,
+  MASS,
+  ape
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
