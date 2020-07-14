@@ -59,7 +59,7 @@ neighborhood <- function(...) {
 
 #' @rdname neighborhood
 #' @export
-neighborhood.default <- function(x, y, measures="all", ...) {
+neighborhood.default <- function(x, y, measures="all", mst.package = "igraph", ...) {
   
   if(!is.data.frame(x)) {
     stop("data argument must be a data.frame")
@@ -90,13 +90,17 @@ neighborhood.default <- function(x, y, measures="all", ...) {
   dst <- dist(x)
   
   sapply(measures, function(f) {
-    eval(call(paste("c", f, sep="."), dst=dst, data=data))
+    if(grepl(pattern = "N1",f)){
+      eval(call(paste("c", f, sep="."), dst=dst, data=data, mst.package = mst.package))  
+    }else {
+      eval(call(paste("c", f, sep="."), dst=dst, data=data))
+    }  
   }, simplify = F)
 }
 
 #' @rdname neighborhood
 #' @export
-neighborhood.formula <- function(formula, data, measures="all", ...) {
+neighborhood.formula <- function(formula, data, measures="all", mst.package = "igraph", ...) {
   
   if(!inherits(formula, "formula")) {
     stop("method is only for formula datas")
@@ -110,17 +114,30 @@ neighborhood.formula <- function(formula, data, measures="all", ...) {
   attr(modFrame, "terms") <- NULL
   
   neighborhood.default(modFrame[, -1, drop=FALSE], modFrame[, 1, drop=FALSE],
-                       measures, ...)
+                       measures, mst.package = mst.package, ...)
 }
 
 ls.neighborhood <- function() {
   c("N1_partial","N2_partial", "N3_partial", "N4_partial", "T1_partial")
 }
 
-c.N1 <- function(dst, data) {
-  links = ape::mst(as.dist(dst))
-  aux = sapply(rownames(links), FUN = function(x) sum(data[x,"class"] != data[names(which(links[x,] == 1)),"class"]) > 0 )
-  return(sum(aux)/nrow(data))
+c.N1 <- function(dst, data, mst.package = "igraph") {
+  if(mst.package == "igraph"){
+    g <- igraph::graph.adjacency(dst, mode="undirected", weighted=TRUE)
+    tree <- as.matrix(igraph::as_adj(igraph::mst(g)))
+
+    tmp <- which(tree != 0, arr.ind=TRUE)
+    aux <- which(data[tmp[,1],]$class != data[tmp[,2],]$class)
+    aux <- length(unique(tmp[aux,1]))
+    return(aux/nrow(data))
+  }
+  else if(mst.package == "ape"){
+    links = ape::mst(as.dist(dst))
+    aux = sapply(rownames(links), FUN = function(x) sum(data[x,"class"] != data[names(which(links[x,] == 1)),"class"]) > 0 )
+    return(sum(aux)/nrow(data))
+  }
+  #else 
+
 }
 
 intra <- function(dst, data, i) {
@@ -250,16 +267,32 @@ c.LSC <- function(dst, data) {
   return(aux)
 }
 
-c.N1_partial <- function(dst, data) {
+c.N1_partial <- function(dst, data, mst.package = "igraph") {
+  if(mst.package == "igraph"){
+    g <- igraph::graph.adjacency(dst, weighted=TRUE)
+    tree <- as.matrix(igraph::as_adj(igraph::mst(igraph::as.undirected(g))))
+
+    tmp = which(tree != 0, arr.ind = TRUE)
+    cons = data[tmp[,1],]$class != data[tmp[,2],]$class
+    classes <- unique(data$class)
+    ret = mapply(classes, FUN=function(c){
+      aux = sum(data[unique(tmp[cons,1]),"class"] == c)
+      return(aux/sum(data[,"class"] == c))
+    })
+    names(ret) = classes
+    return(ret)
+  }
+  else if(mst.package == "ape"){
+    links = ape::mst(as.dist(dst))
+    classes <- unique(data$class)
+    ret = mapply(classes, FUN=function(c){
+      aux = sapply(rownames(data[data$class == c,]), FUN = function(x) sum(data[x,"class"] != data[names(which(links[x,] == 1)),"class"]) > 0 )
+      return(sum(aux)/sum(data$class == c))
+    })
+    names(ret) = classes
+    return(ret)
+  }
   
-  links = ape::mst(as.dist(dst))
-  classes <- unique(data$class)
-  ret = mapply(classes, FUN=function(c){
-    aux = sapply(rownames(data[data$class == c,]), FUN = function(x) sum(data[x,"class"] != data[names(which(links[x,] == 1)),"class"]) > 0 )
-    return(sum(aux)/sum(data$class == c))
-  })
-  names(ret) = classes
-  return(ret)
 }
 
 c.N2_partial <- function(dst, data) {

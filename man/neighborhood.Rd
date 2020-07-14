@@ -39,7 +39,7 @@ The following measures are allowed for this method:
  \describe{
    \item{"N1"}{Fraction of borderline points (N1) computes the percentage of 
      vertexes incident to edges connecting examples of opposite classes in 
-     a Minimum Spanning Tree (MST).}
+     a Minimum Spanning Tree (MST). The default package to build the MST is igraph. If you are handling data with duplicated instances, we suggest using ape.}
    \item{"N2"}{Ratio of intra/extra class nearest neighbor distance (N2)  
      computes the ratio of two sums: intra-class and inter-class. The former 
      corresponds to the sum of the distances between each example and its 
