@@ -61,6 +61,8 @@ The implementation of ImbCoL is based on the implementation of ECoL. We suggest 
 
 To cite `ImbCoL` in publications use: 
 
+* Barella, V. H., Garcia, L. P., de Souto, M. C., Lorena, A. C., & de Carvalho, A. C. (2021). Assessing the data complexity of imbalanced datasets. Information Sciences, 553, 83-109.
+
 * Barella, V. H., Garcia, L. P., de Souto, M. P., Lorena, A. C., & De Carvalho, A. (2018, July). Data Complexity Measures for Imbalanced Classification Tasks. In 2018 International Joint Conference on Neural Networks (IJCNN) (pp. 1-8). IEEE.
 
 To submit bugs and feature requests, report at [project issues](https://github.com/victorhb/ImbCoL/issues).
@@ -74,3 +76,5 @@ To submit bugs and feature requests, report at [project issues](https://github.c
 [3] Garcia, L., Lorena, A., Lehmann, and J.  ECoL:   Complexity   Measures   for   Classification   Problems,   https://CRAN.R-project.org/package=ECoL, 2018
 
 [4] R Core Team (2019). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
+
+[5] Barella, V. H., Garcia, L. P., de Souto, M. C., Lorena, A. C., & de Carvalho, A. C. (2021). Assessing the data complexity of imbalanced datasets. Information Sciences, 553, 83-109.
